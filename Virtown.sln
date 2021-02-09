@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Virtown", "Virtown\Virtown.csproj", "{5E6FC694-17C8-4E75-B40F-F634BDA0E86C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VirtownShared", "VirtownShared\VirtownShared.shproj", "{F279FA64-8B58-47C5-82CE-2207A678EC53}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		VirtownShared\VirtownShared.projitems*{5e6fc694-17c8-4e75-b40f-f634bda0e86c}*SharedItemsImports = 5
+		VirtownShared\VirtownShared.projitems*{f279fa64-8b58-47c5-82ce-2207a678ec53}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E6FC694-17C8-4E75-B40F-F634BDA0E86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6FC694-17C8-4E75-B40F-F634BDA0E86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6FC694-17C8-4E75-B40F-F634BDA0E86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6FC694-17C8-4E75-B40F-F634BDA0E86C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56B5939B-03FB-44E9-A34A-17CDA1244A51}
+	EndGlobalSection
+EndGlobal

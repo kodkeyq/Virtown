@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Global\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Isometric.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Global\ByteConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\ClientManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\ClientServerManager.cs" />
@@ -31,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\ServerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Users\UserManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Users\UserServerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Worlds\Cell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Worlds\World.cs" />
   </ItemGroup>
 </Project>

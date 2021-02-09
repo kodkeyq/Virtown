@@ -4,6 +4,7 @@ using System.Text;
 using VirtownShared.Users;
 using VirtownShared.Worlds;
 using VirtownShared.Network.Packets;
+using VirtownShared.Global;
 
 namespace VirtownShared.Network
 {

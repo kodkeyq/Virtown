@@ -14,12 +14,11 @@ namespace VirtownShared.Atlas
     {
         public static RenderTarget2D Atlas2D;
 
-        public static Point[,,,,] EmptyMap = new Point[
+        public static Rectangle[,,,] EmptyMap = new Rectangle[
             4,
             Constants.EntityMaxAnimationIndex,
             Constants.EntityMaxIsoSizeX,
-            Constants.EntityMaxIsoSizeY,
-            Constants.EntityMaxIsoSizeZ];
+            Constants.EntityMaxIsoSizeY];
 
 
         private static EntityData EmptyEntityData = new EntityData("empty", new Point(0, 0), 0, EmptyMap, EntityTypeEnum.Empty);
@@ -51,7 +50,7 @@ namespace VirtownShared.Atlas
             else
             {
                 Texture2D texture = _contentManager.Load<Texture2D>(textureName);
-                Point[,,,,] map = Atlas.Map(texture, new Point(nullX, nullY), new Point(isoSizeX, isoSizeY), isoSizeZ, maxDirectionIndex, maxAnimationIndex);
+                Rectangle[,,,] map = Atlas.Map(texture, new Point(nullX, nullY), new Point(isoSizeX, isoSizeY), isoSizeZ, maxDirectionIndex, maxAnimationIndex);
 
                 EntityData entityData = new EntityData(name, new Point(isoSizeX, isoSizeY), isoSizeZ, map, type);
                 _storage.TryAdd(name, entityData);

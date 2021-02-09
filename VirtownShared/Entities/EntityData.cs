@@ -11,10 +11,10 @@ namespace VirtownShared.Entities
         public readonly string Name;
         public readonly Point IsoSize;
         public readonly int IsoSizeZ;
-        public readonly Point[,,,,] Map;
+        public readonly Rectangle[,,,] Map;
         public readonly EntityTypeEnum Type;
 
-        public EntityData(string name, Point isoSize, int isoSizeZ, Point[,,,,] map, EntityTypeEnum type)
+        public EntityData(string name, Point isoSize, int isoSizeZ, Rectangle[,,,] map, EntityTypeEnum type)
         {
             Name = name;
             IsoSize = isoSize;

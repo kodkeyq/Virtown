@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using VirtownShared.Global;
 
-namespace VirtownShared
+namespace VirtownShared.Global
 {
     public static class Constants
     {
@@ -20,7 +19,7 @@ namespace VirtownShared
 
         public const int AtlasMapsCount = 1000;
 
-        public const int SpriteIndexMax = 100;
+        public const int SpriteIndexMax = 30;
 
         public const string HostName = "127.0.0.1";
         public const int Port = 51000;
@@ -39,6 +38,9 @@ namespace VirtownShared
 
         public const bool Client = true;
         public const bool Server = !Client;
+
+        public const int MaxEntitiesCount = 1000;
+        public const int MaxPersonsCount = 100;
     }
 
 

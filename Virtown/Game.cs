@@ -64,16 +64,11 @@ namespace Virtown
             {
                 for (int j = 0; j < en.IsoDirectionSize.Y; j++)
                 {
-                    for (int k = 0; k < en.IsoSizeZ; k++)
-                    {
                         Vector2 position = Isometric.IsoToCart(new Point(i, j)).ToVector2();
 
-                        Point sp = en.GetSprite(new Point(i, j), k);
-                        sp.X *= 32;
-                        sp.Y *= 32;
-                        Rectangle srcRect = new Rectangle(sp, new Point(32, 32));
-                        _spriteBatch.Draw(EntitiesStorage.Atlas2D, position + new Vector2(100, 100-k*16), srcRect, Color.White);
-                    }
+                        Rectangle srcRect = en.GetSprite(new Point(i, j));
+                    _spriteBatch.Draw(EntitiesStorage.Atlas2D, position + new Vector2(100, 100), srcRect, Color.White);
+                    
                 }
             }
             _spriteBatch.End();

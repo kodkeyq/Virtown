@@ -107,14 +107,13 @@ namespace VirtownShared.Atlas
             }
         }
 
-        public static Point[,,,,] Map(Texture2D texture, Point nullPoint, Point isoSize, int isoSizeZ,int maxDirectionIndex, int maxAnimationIndex)
+        public static Rectangle[,,,] Map(Texture2D texture, Point nullPoint, Point isoSize, int isoSizeZ,int maxDirectionIndex, int maxAnimationIndex)
         {
-            Point[,,,,] map = new Point[
+            Rectangle[,,,] map = new Rectangle[
             4,
             Constants.EntityMaxAnimationIndex,
             Constants.EntityMaxIsoSizeX,
-            Constants.EntityMaxIsoSizeY,
-            Constants.EntityMaxIsoSizeZ];
+            Constants.EntityMaxIsoSizeY];
 
             if (!_begin) { throw new Exception("Where is begin method?"); }
             else
@@ -130,40 +129,43 @@ namespace VirtownShared.Atlas
                         {
                             for (int l = 0; l < isoDirectionSize.Y; l++)
                             {
-                                for (int m = 0; m < isoSizeZ; m++)
+
+                                if (k == isoDirectionSize.X - 1 || l == isoDirectionSize.Y - 1)
                                 {
-                                    if (k == isoDirectionSize.X - 1 || l == isoDirectionSize.Y - 1 || m == isoSizeZ - 1)
+                                    map[i, j, k, l] = new Rectangle(
+                                        _spriteIndex.X * Constants.Grid,
+                                        (_spriteIndex.Y + 1) * Constants.GridH *(Constants.EntityMaxIsoSizeZ - isoSizeZ),
+                                        Constants.Grid,
+                                        Constants.GridH * (isoSizeZ + 1));
+
+                                    Point iso = GetTransformedIso(i, new Point(k, l));
+                                    int x, y;
+                                    Isometric.IsoToCart(iso.X, iso.Y, out x, out y);
+
+                                    Rectangle srcRect = new Rectangle(x - Constants.GridH + newNullPoint.X, y - Constants.GridH * isoSizeZ + newNullPoint.Y,
+                                        Constants.Grid, Constants.GridH * isoSizeZ);
+
+                                    Vector2 position = new Vector2(_spriteIndex.X * Constants.Grid, (_spriteIndex.Y + 1) * (Constants.EntityMaxIsoSizeZ - isoSizeZ) * Constants.GridH);
+                                    if (Flip(i))
                                     {
-                                        map[i, j, k, l, m] = _spriteIndex;
-
-                                        Point iso = GetTransformedIso(i, new Point(k, l));
-                                        int x, y;
-                                        Isometric.IsoToCart(iso.X, iso.Y, out x, out y);
-
-                                        Rectangle srcRect = new Rectangle(x - Constants.GridH + newNullPoint.X, y - Constants.GridH + newNullPoint.Y - Constants.GridH * m,
-                                            Constants.Grid, Constants.Grid);
-
-                                        Vector2 position = new Vector2(_spriteIndex.X * Constants.Grid, _spriteIndex.Y * Constants.Grid);
-                                        if (Flip(i))
-                                        {
-                                            _spriteBatch.Draw(texture, position, srcRect, 
-                                                Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 0);
-                                        }
-                                        else
-                                        {
-                                            _spriteBatch.Draw(texture, position, srcRect, Color.White);
-                                        }
+                                        _spriteBatch.Draw(texture, position, srcRect,
+                                            Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 0);
+                                    }
+                                    else
+                                    {
+                                        _spriteBatch.Draw(texture, position, srcRect, Color.White);
+                                    }
 
 
 
-                                        _spriteIndex.X++;
-                                        if (_spriteIndex.X >= Constants.SpriteIndexMax)
-                                        {
-                                            _spriteIndex.X = 0;
-                                            _spriteIndex.Y++;
-                                        }
+                                    _spriteIndex.X++;
+                                    if (_spriteIndex.X >= Constants.SpriteIndexMax)
+                                    {
+                                        _spriteIndex.X = 0;
+                                        _spriteIndex.Y++;
                                     }
                                 }
+                                
                             }
                         }
                     }

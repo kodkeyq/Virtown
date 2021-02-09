@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Net.Sockets;
+using VirtownShared.Global;
 
 namespace VirtownShared.Network
 {

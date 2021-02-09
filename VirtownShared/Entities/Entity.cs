@@ -13,6 +13,7 @@ namespace VirtownShared.Entities
         private EntityData _data;
         private readonly Point[] _isoDirectionSize = new Point[4];
 
+        public string Name { get { return _data.Name; } }
 
         public DirectionEnum Direction { get; private set; }
         public Point IsoDirectionSize { get { return _isoDirectionSize[(byte)Direction]; } }
@@ -30,21 +31,18 @@ namespace VirtownShared.Entities
             Direction = direction;
         }
         public virtual void SetLocation(Point isoLocation) { IsoLocation = isoLocation; }
-        public virtual Point GetSprite(Point isoCall, int isoCallZ)
+
+        private readonly Rectangle _nullRectangle = new Rectangle(0,0,0,0);
+        public virtual Rectangle GetSprite(Point isoCall)
         {
             if (isoCall.X >= 0 && isoCall.Y >= 0 && isoCall.X < IsoDirectionSize.X && isoCall.Y < IsoDirectionSize.Y)
             {
-                return _data.Map[(byte)Direction, 0, isoCall.X, isoCall.Y, isoCallZ];
+                return _data.Map[(byte)Direction, 0, isoCall.X, isoCall.Y];
             }
             else
             {
-                return new Point(0, 0);
+                return _nullRectangle;
             }
-        }
-
-        public virtual void Pack()
-        {
-
         }
     }
 }

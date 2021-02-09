@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using VirtownShared.Entities;
+using VirtownShared.Global;
 
 namespace VirtownShared.Worlds
 {
-    public struct Cell
-    {
-
-    }
     public class World
     {
         public Cell[,] Cells;
+        public Point IsoSize { get; private set; }
 
-        public void Resize(Point newIsoSize)
+        public Entity[] EntityList = new Entity[Constants.MaxEntitiesCount];
+        
+        public World(Point isoSize)
         {
-            Cells = new Cell[newIsoSize.X, newIsoSize.Y];
+            Resize(isoSize);
         }
+
+
+
+
+
+        public void Resize(Point isoSize) { IsoSize = isoSize;  Cells = new Cell[IsoSize.X, IsoSize.Y]; }
     }
 }

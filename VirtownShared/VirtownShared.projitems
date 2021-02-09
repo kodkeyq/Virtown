@@ -22,10 +22,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\ClientManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\ClientServerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\PacketManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets\HelloPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets\Packet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets\IPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets\PacketTypeEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets\UserPacket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\RawPacketManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\ServerManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Network\Packets\" />
+    <Compile Include="$(MSBuildThisFileDirectory)Users\UserManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Users\UserServerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Worlds\World.cs" />
   </ItemGroup>
 </Project>

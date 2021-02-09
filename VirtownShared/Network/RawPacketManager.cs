@@ -12,7 +12,7 @@ namespace VirtownShared.Network
 
         private static readonly byte[] _magicBytes = Constants.MagicBytes;
         private static readonly int _magicLength = Constants.MagicBytes.Length;
-        private static readonly int _minLength = Constants.MagicBytes.Length + 5;
+        private static readonly int _minLength = Constants.MagicBytes.Length + sizeof(int) + 1;
 
         private Queue<byte[]> _rawIncomingPackets = new Queue<byte[]>();
         private Queue<byte[]> _rawOutcomingPackets = new Queue<byte[]>();
@@ -26,12 +26,18 @@ namespace VirtownShared.Network
 
         public byte[] ReadIncomingPacket()
         {
-            return _rawIncomingPackets.Dequeue();
+            byte[] rawPacket = _rawIncomingPackets.Dequeue();
+            byte[] unsignedRawPacket = new byte[rawPacket.Length - _magicLength - sizeof(int)];
+            Buffer.BlockCopy(rawPacket, _magicLength + sizeof(int), unsignedRawPacket, 0, unsignedRawPacket.Length);
+            return unsignedRawPacket;
         }
 
         public void WriteOutcomingPacket(byte[] rawPacket)
         {
-            _rawOutcomingPackets.Enqueue(rawPacket);
+            byte[] signedRawPacket = new byte[rawPacket.Length + _magicLength + sizeof(int)];
+            Buffer.BlockCopy(_magicBytes, 0, signedRawPacket, 0, _magicBytes.Length);
+            WriteLength(signedRawPacket, _magicLength, rawPacket.Length);
+            _rawOutcomingPackets.Enqueue(signedRawPacket);
         }
         public int ReadBufferSize
         {
@@ -69,7 +75,7 @@ namespace VirtownShared.Network
                     int packetHeaderIndex = FindPacketHeaderIndex(scanStart, _rawLength);
                     if (packetHeaderIndex != -1 && (packetHeaderIndex < (_rawLength - _minLength + 1)))
                     {
-                        int packetLength = ByteConverter.ReadInt(_rawBuffer, packetHeaderIndex + _magicLength);
+                        int packetLength = ReadLength(_rawBuffer, packetHeaderIndex + _magicLength);
                         if (packetHeaderIndex < (_rawLength - packetLength + 1))
                         {
                             ExtractPacket(packetHeaderIndex, packetLength);
@@ -87,6 +93,18 @@ namespace VirtownShared.Network
             }
         }
 
+        private void WriteLength(byte[] rawPacket, int index, int length)
+        {
+            rawPacket[index] = (byte)length;
+            rawPacket[index + 1] = (byte)(length >> 8);
+            rawPacket[index + 2] = (byte)(length >> 16);
+            rawPacket[index + 3] = (byte)(length >> 24);
+        }
+
+        private int ReadLength(byte[] data, int index)
+        {
+            return data[0 + index] | (data[1 + index] << 8) | (data[2 + index] << 16) | (data[3 + index] << 24);
+        }
         private void ExtractPacket(int packetHeaderIndex, int packetLength)
         {
             byte[] rawPacket = new byte[packetLength];

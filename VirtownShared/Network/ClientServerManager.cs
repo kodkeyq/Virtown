@@ -16,6 +16,7 @@ namespace VirtownShared.Network
             {
                 _client = client;
                 _networkStream = _client.GetStream();
+                _client.NoDelay = true;
             }
             catch (Exception exception)
             {

@@ -33,6 +33,12 @@ namespace VirtownShared
         public const bool Debug = true;
 
         public const int MaxOutcomingPackets = 20;
+
+        public const int MaxUsersCount = 65536;
+        public const int MaxPacketSize = 65536;
+
+        public const bool Client = true;
+        public const bool Server = !Client;
     }
 
 

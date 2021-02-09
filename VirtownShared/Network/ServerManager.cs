@@ -40,9 +40,14 @@ namespace VirtownShared.Network
         }
         public void Tick(double lastTimeTick)
         {
-            if (_started && CanUpdate(lastTimeTick))
+            if (_started)
             {
-                Listen();
+                if (CanUpdate(lastTimeTick)) Listen();
+
+                for (int i = 0; i < Clients.Length; i++)
+                {
+                    Clients[i]?.Tick(lastTimeTick);
+                }
             }
         }
 
